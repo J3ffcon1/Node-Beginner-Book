@@ -11,6 +11,7 @@ function start() {
 
     http.createServer(onRequest).listen(8888);
     console.log("Server has started");
+
 }
 
 exports.start = start; //we can now export our start function "module" to be used elsewhere!
