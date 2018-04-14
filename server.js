@@ -1,15 +1,16 @@
 const http = require('http');
 const url = require("url");
 
-function start(route) { //pass through our route function.
+function start(route, handle) { //pass through our route function.
     function onRequest(request, response) { //request and response are two objects we use in our code.
         let pathname = url.parse(request.url).pathname;
         console.log(`Request for ${pathname} recieved.`);
 
-        route(pathname);
+        // route(handle, pathname);
 
         response.writeHead(200, {"Content-type": "text/plain"});//send HTTP status 200 and content type to HTTP header
-        response.write("Hello World");//response.write to send the text "Helo World" to the HTTP body.
+        let content = route(handle, pathname);
+        response.write(content);//response.write to send the text "Helo World" to the HTTP body.
         response.end(); //call response.end() to finish our response.
     }
 
