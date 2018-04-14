@@ -3,7 +3,8 @@ const url = require("url");
 
 function start() { 
     function onRequest(request, response) { //request and response are two objects we use in our code.
-        console.log("Request recieved.");
+        let pathname = url.parse(request.url),pathname;
+        console.log(`Request for ${pathname} recieved.`);
         response.writeHead(200, {"Content-type": "text/plain"});//send HTTP status 200 and content type to HTTP header
         response.write("Hello World");//response.write to send the text "Helo World" to the HTTP body.
         response.end(); //call response.end() to finish our response.
