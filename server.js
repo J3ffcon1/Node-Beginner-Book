@@ -6,12 +6,12 @@ function start(route, handle) { //pass through our route function.
         let pathname = url.parse(request.url).pathname;
         console.log(`Request for ${pathname} recieved.`);
 
-        // route(handle, pathname);
+        route(handle, pathname, response);
 
-        response.writeHead(200, {"Content-type": "text/plain"});//send HTTP status 200 and content type to HTTP header
-        let content = route(handle, pathname);
-        response.write(content);//response.write to send the text "Helo World" to the HTTP body.
-        response.end(); //call response.end() to finish our response.
+        // response.writeHead(200, {"Content-type": "text/plain"});//send HTTP status 200 and content type to HTTP header
+        // let content = route(handle, pathname);
+        // response.write(content);//response.write to send the text "Helo World" to the HTTP body.
+        // response.end(); //call response.end() to finish our response.
     }
 
     http.createServer(onRequest).listen(8888);
