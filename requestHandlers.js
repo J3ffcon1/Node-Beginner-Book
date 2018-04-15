@@ -3,13 +3,24 @@ const exec = require("child_process").exec; //exec executes a shell command from
 function start(response) {
     console.log("Request handler 'start' was called.");
     // let content = "empty";
-   
-    exec("find /",{ timeout: 10000, maxBuffer: 20000*1024 }, 
-    function (error, stdout, stderr) {
-        response.writeHead(200, {"Content-Type": "text/plain"});
-        response.write(stdout);
+
+    let body = '<html>' +
+        '<head>' +
+        '<meta http-equiv="Content-Type" content="text/html; '+
+        'chartset=UTF-8" />'+
+        '</head>'+
+        '<body>'+
+        '<form action="/upload" method="post">'+
+        '<textarea name="text" rows="20" cols="60"></textarea>'+
+        '<input type="submit" value="submit text" />'+
+        '</form>'+
+        '</body>'+
+        '</html>';
+
+        response.writeHead(200, {"Content-Type": "text/html"});
+        response.write(body);
         response.end();
-    });
+   
     // return content;
 }
 
