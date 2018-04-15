@@ -3,6 +3,7 @@ const url = require("url");
 
 function start(route, handle) { //pass through our route function.
     function onRequest(request, response) { //request and response are two objects we use in our code.
+
         let pathname = url.parse(request.url).pathname;
         console.log(`Request for ${pathname} recieved.`);
         route(handle, pathname, response, request);
@@ -18,6 +19,7 @@ function start(route, handle) { //pass through our route function.
         // let content = route(handle, pathname);
         // response.write(content);//response.write to send the text "Helo World" to the HTTP body.
         // response.end(); //call response.end() to finish our response.
+
 
 
 
