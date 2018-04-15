@@ -1,6 +1,7 @@
-const exec = require("child_process").exec; //exec executes a shell command from within Node.
+// const exec = require("child_process").exec; //exec executes a shell command from within Node.
+const querystring = require("querystring");
 
-function start(response) {
+function start(response, postData) {
     console.log("Request handler 'start' was called.");
     // let content = "empty";
 
@@ -24,10 +25,10 @@ function start(response) {
     // return content;
 }
 
-function upload(response) {
+function upload(response, postData) {
     console.log("Request handler 'upload' was called.");
     response.writeHead(200, {"Content-Type": "text/plain"});
-    response.write("Hello Upload");
+    response.write(`You've sent: ${postData}`);
     response.end();
 }
 

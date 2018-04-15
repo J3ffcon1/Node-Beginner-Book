@@ -3,10 +3,22 @@ const url = require("url");
 
 function start(route, handle) { //pass through our route function.
     function onRequest(request, response) { //request and response are two objects we use in our code.
+        let postData = ""; 
         let pathname = url.parse(request.url).pathname;
         console.log(`Request for ${pathname} recieved.`);
 
-        route(handle, pathname, response);
+        request.setEncoding("utf8");
+
+        request.addListener("data", function(postDataChunk) {
+            postData += postDataChunk;
+            console.log(`recieved POST data chunk ${postDataChunk}.`);
+        });
+
+        request.addListener("end", function() {
+            route(handle, pathname, response, postData);
+
+        });
+
 
         // response.writeHead(200, {"Content-type": "text/plain"});//send HTTP status 200 and content type to HTTP header
         // let content = route(handle, pathname);
